@@ -1,26 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import{BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import Header from './contents/Header'
+import Items from './contents/Items'
+import ErrorPage from './contents/ErrorPage'
 
-function App() {
+class App extends React.Component {
+
+  render() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
+  	<Router>
+  	 <Header />
+  	 <main>
+  	  <Routes>
+  	   <Route path='/' element={<Items />}/>
+  	   <Route path='*' element={<ErrorPage />}/>
+  	  </Routes>
+  	 </main>
+  	 <footer>
+  	   <p className='text-light'>created by Idokoken</p>
+  	 </footer>
+  	</Router>
+  	 	
+  )
+ }
+ 
+ }
+ 
+export default App; 
