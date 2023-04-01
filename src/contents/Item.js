@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 function Item() {
   const { id } = useParams();
-  //const [meal, setMeal] = useState("chicken");
+  const [meal, setMeal] = useState("chicken");
   const [data, setData] = useState({});
 
   const fetchMeal = async () => {

@@ -1,7 +1,51 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import * as dotenv from "dotenv";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { Tablet } from "../Responsive";
+// import Data from "./data";
+
 dotenv.config();
+
+const Wrapper = styled.div`
+  min-height: calc(100vh - 230px);
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+
+  h2 {
+    color: rgba(183, 22, 22, 0.8);
+  }
+  input {
+    border-radius: 10px 0 0 10px;
+  }
+  button {
+    border-radius: 0 10px 10px 0;
+  }
+  .search {
+    width: 100%;
+    ${Tablet({ width: "50%" })}
+  }
+  .content {
+    display: grid;
+    grid-template-columns: 100%;
+    justify-items: center;
+    ${Tablet({ gridTemplateColumns: "50% 50%" })}
+  }
+  .content .recipe {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  img {
+    border-radius: 20px;
+  }
+  .link {
+    color: rgba(183, 22, 22, 0.8) !important;
+    border: 2px solid rgba(183, 22, 22, 0.8);
+    border-radius: 10px;
+  }
+`;
 
 function Items() {
   const [data, setData] = useState([]);
@@ -48,20 +92,21 @@ function Items() {
         alt={a.recipe.label}
         style={{ maxHeight: "400" }}
       />
-      <h3 className="mb-0 mt-2">{a.recipe.label}</h3>
-      <p className="mb-0">{a.recipe.calories}</p>
-      <a className="btn" target="_blank" href={`/item/{i}`}>
+      <h3 className="my-2">{a.recipe.label}</h3>
+      <p className="">{a.recipe.calories}</p>
+      <Link to="/" className="btn link">
         View Details
-      </a>
+      </Link>
       <hr />
     </div>
   ));
+  // {`/product/${item._id}`}
   return (
-    <div>
-      <div className="container my-4" style={{ width: "100%" }}>
+    <Wrapper>
+      <div className="container my-4 search">
         <form className="d-flex" onSubmit={handleSubmit}>
           <input
-            className="form-control me-2"
+            className="form-control"
             type="search"
             placeholder="enter meal"
             name="meal"
@@ -73,13 +118,11 @@ function Items() {
           </button>
         </form>
       </div>
-      <h2 className="m-3">Featured Recipes</h2>
+      <h2 className="m-3 text-center">Featured Recipes</h2>
       <div className="container mt-3">
-        <div className="row">
-          <div className="col-12 col-md-6 col-lg-4 mb-2">{listItems}</div>
-        </div>
+        <div className="content mb-2">{listItems}</div>
       </div>
-    </div>
+    </Wrapper>
   );
 }
 
