@@ -13,6 +13,9 @@ body {
 }
 .recipe .btn {
 	color: var(--secondary-color) !important;
-	background-color: var(--secondary-color) !important;
-	
+	background-color: var(--secondary-color) !important;	
+}
+
+section{
+	color: rgba(211, 15, 69, 1);
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Data from "./data";
 import { useParams } from "react-router-dom";
+// import Data from "./data";
 
 function Item() {
   const { id } = useParams();
@@ -10,9 +10,14 @@ function Item() {
 
   const fetchMeal = async () => {
     const api =
-      "https://api.edamam.com/search?q=" +
-      "chicken" +
-      "&app_id=da3c3fcf&app_key=44d4203540d418e418cd925fb34b5084/";
+      "https://api.edamam.com/api/recipes/v2" +
+      id +
+      "?q=" +
+      meal +
+      "&app_id=" +
+      process.env.APP_ID +
+      "&app_key=" +
+      process.env.APP_KEY;
     try {
       let resp = await axios.get(api);
       let result = resp.data.hits;
@@ -27,18 +32,20 @@ function Item() {
     fetchMeal();
   }, [meal]);
 
-  const product = Data.filter((c) => c.id == id).map((a) => (
-    <div>
-      <img
-        src={a.cover}
-        className="img-fluid"
-        alt={a.title}
-        style={{ maxHeight: "400" }}
-      />
-      <h3 className="mb-0 mt-2">{a.author}</h3>
-      <p className="mb-0">{a.title}</p>
-    </div>
-  ));
+  const product = data
+    .filter((c) => c.id === id)
+    .map((a) => (
+      <div>
+        <img
+          src={a.image}
+          className="img-fluid"
+          alt={a.label}
+          style={{ maxHeight: "400" }}
+        />
+        <h3 className="mb-0 mt-2">{a.calories}</h3>
+        <p className="mb-0">{a.label}</p>
+      </div>
+    ));
 
   return (
     <div className="container">

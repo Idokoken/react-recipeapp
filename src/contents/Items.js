@@ -55,24 +55,32 @@ function Items() {
   const api =
     "https://api.edamam.com/search?q=" +
     meal +
-    "&app_id=da3c3fcf&app_key=44d4203540d418e418cd925fb34b5084";
+    "&app_id=da3c3fcf&app_key=438f256848455662d93d52a982bb17e8";
 
-  //const api = "https://api.edamam.com/search?q=" + meal + process.env.API_KEY;
+  // const api2 =
+  //   "https://api.edamam.com/api/recipes/v2?q=" +
+  //   meal +
+  //   "&app_id=" +
+  //   process.env.APP_ID +
+  //   "&app_key=" +
+  //   process.env.APP_KEY;
 
-  const fetchMeal = async () => {
-    try {
-      let resp = await axios.get(api);
-      let result = resp.data.hits;
-      setData(result);
-      console.log(result);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const api3 = `https://api.edamam.com/api/recipes/v2?q=${meal}
+  //    &app_id=${process.env.APP_ID}&app_key=${process.env.APP_KEY}`;
 
   useEffect(() => {
+    const fetchMeal = async () => {
+      try {
+        let resp = await axios.get(api);
+        let result = resp.data.hits;
+        setData(result);
+        console.log(result);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     fetchMeal();
-  }, [meal]);
+  }, [api]);
 
   const handleChange = (e) => {
     setQuery(e.target.value);
